@@ -3,6 +3,10 @@ const [method, route, title, price, category] = process.argv.slice(2);
 const API_URL = 'https://fakestoreapi.com';
 
 async function manageProducts() {
+    if (!route) {
+        return console.error("Error: Debes proporcionar una 'route' (por ejemplo, 'products' o 'products/1').");
+    }
+
     try {
         if (method === 'GET') {
             const response = await fetch(`${API_URL}/${route}`);
@@ -11,6 +15,15 @@ async function manageProducts() {
             console.log(data);
         } 
         else if (method === 'POST') {
+            if (!title || !price || !category) {
+                return console.error("Error: Para el método POST es obligatorio enviar 'title', 'price' y 'category'.");
+            }
+            
+            const numericPrice = Number(price);
+            if (isNaN(numericPrice) || numericPrice <= 0) {
+                return console.error("Error: El precio ('price') debe ser un número válido mayor a 0.");
+            }
+
             const config = {
                 method: 'POST',
                 headers: {
@@ -18,7 +31,7 @@ async function manageProducts() {
                 },
                 body: JSON.stringify({
                     title: title,
-                    price: Number(price),
+                    price: numericPrice,
                     category: category
                 })
             };
