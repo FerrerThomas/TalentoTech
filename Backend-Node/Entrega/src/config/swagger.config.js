@@ -1,4 +1,5 @@
 import swaggerJSDoc from 'swagger-jsdoc';
+import path from 'path';
 
 const options = {
   definition: {
@@ -29,7 +30,7 @@ const options = {
       },
     ],
   },
-  apis: ['./src/routes/*.js'], // Ruta a los archivos donde están las anotaciones
+  apis: [path.join(process.cwd(), 'src/routes/*.js')], // Ruta absoluta para Vercel
 };
 
 const swaggerSpec = swaggerJSDoc(options);

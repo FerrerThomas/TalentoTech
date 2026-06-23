@@ -25,8 +25,17 @@ app.use(bodyParser.json());
 app.use('/auth', authRoutes);
 app.use('/api/products', productsRoutes);
 
+// Opciones para Swagger en Vercel 
+const swaggerUiOptions = {
+    customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.min.css',
+    customJs: [
+        'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-bundle.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-standalone-preset.js'
+    ]
+};
+
 // Configurar Swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerUiOptions));
 
 // Configurar middleware para rutas desconocidas (404)
 app.use(notFoundHandler);
