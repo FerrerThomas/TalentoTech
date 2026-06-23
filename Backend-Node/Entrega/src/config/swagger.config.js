@@ -30,7 +30,7 @@ const options = {
       },
     ],
   },
-  apis: [path.join(process.cwd(), 'src/routes/*.js')], // Ruta absoluta para Vercel
+  apis: ['./src/routes/*.js'], // Se vuelve a la ruta relativa para evitar problemas con las barras invertidas en Windows
 };
 
 const swaggerSpec = swaggerJSDoc(options);
