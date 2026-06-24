@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Ruta absoluta a las rutas asi funciona tanto en local como en Vercel
-const routesPath = path.join(__dirname, '../routes/*.js');
+const routesPath = path.join(__dirname, '../routes/*.js').replace(/\\/g, '/');
 
 const options = {
   definition: {

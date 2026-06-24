@@ -8,6 +8,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './src/config/swagger.config.js';
 
 // Importar rutas
+import homeRoutes from './src/routes/home.routes.js'; // ignorar es del front Jeannn
 import authRoutes from './src/routes/auth.routes.js';
 import productsRoutes from './src/routes/products.routes.js';
 
@@ -22,6 +23,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Configurar rutas
+app.use('/', homeRoutes); // ignorar es del front Jeannn
 app.use('/auth', authRoutes);
 app.use('/api/products', productsRoutes);
 
