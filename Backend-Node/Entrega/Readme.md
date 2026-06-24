@@ -2,6 +2,8 @@
 
 API REST para consultar, crear y eliminar productos, construida con Express, protegida con JSON Web Tokens (JWT) e integrada con Firebase Firestore.
 
+**Entrega:** https://backend-node-tomasferrer.vercel.app
+
 ## Requisitos
 
 - Node.js instalado.
