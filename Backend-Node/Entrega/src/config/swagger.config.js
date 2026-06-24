@@ -1,5 +1,12 @@
 import swaggerJSDoc from 'swagger-jsdoc';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Ruta absoluta a las rutas asi funciona tanto en local como en Vercel
+const routesPath = path.join(__dirname, '../routes/*.js');
 
 const options = {
   definition: {
@@ -11,8 +18,10 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
-        description: 'Servidor Local',
+        url: process.env.VERCEL_URL
+          ? `https://${process.env.VERCEL_URL}`
+          : 'http://localhost:3000',
+        description: process.env.VERCEL_URL ? 'Servidor en Vercel' : 'Servidor Local',
       },
     ],
     components: {
@@ -30,7 +39,7 @@ const options = {
       },
     ],
   },
-  apis: ['./src/routes/*.js'], // Se vuelve a la ruta relativa para evitar problemas con las barras invertidas en Windows
+  apis: [routesPath], // Ruta absoluta para que funcione en Vercel (serverless)
 };
 
 const swaggerSpec = swaggerJSDoc(options);
