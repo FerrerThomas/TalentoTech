@@ -1,25 +1,9 @@
-# TechLab E-Commerce - Sibelius Coffee & Specialty Tea
-**Curso:** Java Back-End - Talento Tech / Buenos Aires Aprende  
-**Proyecto:** Entrega Final Obligatoria (API RESTful Spring Boot + MySQL + Frontend Web)
+# E-Commerce - Java Back-End - Talento Tech 
+**Proyecto:** Entrega Final  (API RESTful Spring Boot + MySQL + Frontend Web)
 
 ---
 
-## ☕ 1. Identidad de Marca y Temática del Proyecto
-
-* **Nombre del Proyecto:** **Sibelius Coffee & Specialty Tea** *(Plataforma de E-Commerce desarrollada para la startup TechLab)*.
-* **Descripción:** Tienda gourmet especializada en cafés de origen seleccionados (Colombia, Brasil Bourbon), blends aromáticos de té en hebras (Chai, Sencha), pastelería francesa artesanal y equipamiento barista.
-* **Paleta de Colores Gourmet:**
-  * **Café Tostado Intenso:** `#2B1810` / `#3D2314` (cabeceras, barras de navegación y textos contrastados)
-  * **Caramelo Dorado:** `#C67D3B` (botones de acción, badges y resaltados)
-  * **Verde Té Orgánico:** `#3D6349` (confirmaciones, badges de bebidas saludables)
-  * **Crema Vainilla:** `#FDFAF6` (fondo visual descansado y elegante)
-* **Textos y Contenido:** Descripciones persuasivas con notas de cata sensoriales, volumen en mililitros, temperatura de servicio, gramaje y fechas de vencimiento.
-
----
-
-## 📁 2. Estructura de Paquetes y Módulos
-
-El proyecto sigue la arquitectura por capas estándar en la industria (`com.techlab.*`):
+## 📁 1. Estructura de Paquetes y Módulos
 
 ```text
 Entrega/
@@ -32,7 +16,7 @@ Entrega/
 │   │   │           ├── TechLabApplication.java  # Clase principal Spring Boot
 │   │   │           ├── Main.java                # Punto de entrada secundario
 │   │   │           ├── config/
-│   │   │           │   ├── CorsConfig.java      # Configuración global de CORS (Clase 14)
+│   │   │           │   ├── CorsConfig.java      # Configuración global de CORS 
 │   │   │           │   └── DataLoader.java      # Precarga de datos iniciales Sibelius
 │   │   │           ├── controller/
 │   │   │           │   ├── ProductoController.java  # Endpoints CRUD de productos (/api/productos)
@@ -81,45 +65,13 @@ Entrega/
 │   │           └── js/app.js                    # Consumo de la API REST, Carrito y DOM
 │   └── test/
 │       └── java/
-│           └── com/techlab/TechLabApplicationTests.java # Suite de pruebas automáticas Spring Boot
+│           └── com/techlab/TechLabApplicationTests.java # pruebas automáticas Spring Boot
 └── README.md
 ```
 
 ---
 
-## 🛠️ 3. Requerimientos Técnicos Cumplidos
-
-| Requisito de la Consigna | Implementación en el Proyecto |
-| :--- | :--- |
-| **API RESTful en Java & Spring Boot** | Controladores con `@RestController`, `@RequestMapping`, `@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping`, retornando `ResponseEntity` y códigos HTTP semánticos (200, 201, 204, 400, 404, 409). |
-| **Base de Datos Relacional y JPA** | Conexión con **MySQL (`techlabdb`)** mediante Spring Data JPA e Hibernate (`ddl-auto=update`). Soporte adicional con base H2 embebida. |
-| **Encapsulamiento y Validaciones** | Clases con atributos `private`, validaciones en *setters* y anotaciones Bean Validation (`@NotNull`, `@NotBlank`, `@Min`). |
-| **Herencia y Polimorfismo** | Entidad base `Producto` con herencia `@Inheritance(strategy = InheritanceType.SINGLE_TABLE)` y subclases `Bebida` y `Comida`, sobrescribiendo `mostrarDetalles()` y `getTipo()`. |
-| **Colaboración y Colecciones** | Relaciones `@ManyToOne` y `@OneToMany` entre `Usuario`, `Pedido`, `DetallePedido`, `Producto` y `Categoria`. Uso de `List` y `ArrayList`. |
-| **Colaboración con `LineaPedido`** | `PedidoService` arma un `ArrayList<LineaPedido>` (producto + cantidad), valida el stock de cada línea con `hayStockSuficiente()` y solo si todas son válidas descuenta stock y persiste los `DetallePedido`. |
-| **Manejo de Excepciones** | `@RestControllerAdvice` en `GlobalExceptionHandler`. Ante stock insuficiente lanza `StockInsuficienteException` y devuelve **HTTP 400 Bad Request** con el motivo detallado. Bloques `try/catch` explícitos: `NumberFormatException` al convertir el ID en `GET /api/productos/{id}`, `IllegalArgumentException` al convertir el estado del pedido, y `DataIntegrityViolationException` al eliminar un producto con pedidos (lanza `ProductoConPedidosException` → **HTTP 409 Conflict**). |
-| **CORS Configurado** | `CorsConfig` con `WebMvcConfigurer` que permite el consumo seguro de la API desde cualquier origen (`*` o `http://localhost:3000`). |
-| **Actualización Automática de Stock** | Al confirmarse un pedido, se valida preventivamente el inventario y se descuentan las unidades correspondientes. |
-| **Gestión del Estado de Pedidos** | Estados del pedido: `PENDIENTE`, `CONFIRMADO`, `ENVIADO`, `ENTREGADO`, `CANCELADO`. Si se cancela un pedido, el stock es restituido automáticamente. |
-| **Alertas de Stock Mínimo** | Endpoint `/api/admin/alertas-stock` y panel visual que destaca productos con existencias críticas (&le; 5 unidades) con acción de reposición inmediata. |
-
----
-
-## 💻 4. Requisitos del Menú en el HTML
-
-La interfaz web en [`src/main/resources/static/index.html`](src/main/resources/static/index.html) posee de forma explícita el menú interactivo y la subsección requeridos:
-
-```text
-=================================== SISTEMA DE GESTIÓN - TECHLAB ==================================
-1) Gestionar Productos  2) Gestionar Categorías  3) Ver Carrito de Compras  4) Realizar Pedido  5) Consultar Historial de Pedidos  6) Administración (usuarios y stock)  7) Salir
-
-=================================== ———————Gestión de Productos——————-==================================
-a) Agregar Producto  b) Listar Productos  c) Buscar Producto por ID  d) Actualizar Producto  e) Eliminar Producto  f) Volver al menú principal
-```
-
----
-
-## 📡 5. Endpoints de la API REST
+## 📡 2. Endpoints de la API REST
 
 ### Productos (`/api/productos`)
 * `GET /api/productos`: Lista todo el catálogo de productos con stock y categoría.
@@ -154,7 +106,7 @@ a) Agregar Producto  b) Listar Productos  c) Buscar Producto por ID  d) Actualiz
 
 ---
 
-## 🚀 6. Cómo Ejecutar el Proyecto
+## 🚀 3. Cómo Ejecutar el Proyecto
 
 ### Opción 1: Desde IntelliJ IDEA o Eclipse
 1. Abrir la carpeta `Entrega` como proyecto Maven existente.
